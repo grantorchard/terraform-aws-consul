@@ -1,6 +1,6 @@
 
 variable hostname {
-  type = string
+  type    = string
   default = "consul"
 }
 
@@ -23,16 +23,16 @@ variable instance_type {
 }
 
 variable slack_webhook {
-  type = string
+  type    = string
   default = ""
 }
 
 variable private_ip {
-  type = string
+  type    = string
   default = "10.0.101.162"
 }
 
 variable consul_datacenter {
-  type = string
+  type    = string
   default = "AWS"
 }

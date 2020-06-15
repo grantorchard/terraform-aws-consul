@@ -10,10 +10,10 @@ data terraform_remote_state "this" {
 }
 
 locals {
-  public_subnets = data.terraform_remote_state.this.outputs.public_subnets
+  public_subnets          = data.terraform_remote_state.this.outputs.public_subnets
   security_group_outbound = data.terraform_remote_state.this.outputs.security_group_outbound
-  security_group_ssh = data.terraform_remote_state.this.outputs.security_group_ssh
-  vpc_id = data.terraform_remote_state.this.outputs.vpc_id
+  security_group_ssh      = data.terraform_remote_state.this.outputs.security_group_ssh
+  vpc_id                  = data.terraform_remote_state.this.outputs.vpc_id
 }
 
 data aws_route53_zone "this" {
@@ -25,7 +25,7 @@ data aws_ami "ubuntu" {
   most_recent = true
 
   filter {
-    name = "tag:application"
+    name   = "tag:application"
     values = ["consul-1.7.4"]
   }
 
@@ -41,16 +41,16 @@ module "consul" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "2.13.0"
 
-  name = var.hostname
+  name           = var.hostname
   instance_count = 1
 
   private_ip = var.private_ip
 
   user_data_base64 = base64gzip(data.template_file.userdata.rendered)
 
-  ami = data.aws_ami.ubuntu.id
+  ami           = data.aws_ami.ubuntu.id
   instance_type = var.instance_type
-  key_name = var.key_name
+  key_name      = var.key_name
 
   monitoring = true
   vpc_security_group_ids = [
@@ -60,7 +60,7 @@ module "consul" {
   ]
 
   subnet_id = local.public_subnets[0]
-  tags = var.tags
+  tags      = var.tags
 }
 
 resource aws_route53_record "this" {
@@ -69,10 +69,11 @@ resource aws_route53_record "this" {
   type    = "A"
   ttl     = "300"
   records = [module.consul.public_ip[0]]
+  tags    = var.tags
 }
 
 module "security_group_consul" {
-  source  = "terraform-aws-modules/security-group/aws"
+  source = "terraform-aws-modules/security-group/aws"
 
   name        = "consul-http"
   description = "consul http access"
@@ -84,7 +85,7 @@ module "security_group_consul" {
       to_port     = 8500
       protocol    = "tcp"
       description = "consul ingress"
-      cidr_blocks = "10.0.0.0/16, 106.69.121.249/32"
+      cidr_blocks = "10.0.0.0/16,106.69.121.249/32"
     }
   ]
   tags = var.tags
