@@ -69,7 +69,6 @@ resource aws_route53_record "this" {
   type    = "A"
   ttl     = "300"
   records = [module.consul.public_ip[0]]
-  tags    = var.tags
 }
 
 module "security_group_consul" {
