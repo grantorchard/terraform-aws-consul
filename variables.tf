@@ -36,3 +36,8 @@ variable consul_datacenter {
   type    = string
   default = "AWS"
 }
+
+variable my_cidrs {
+  type = list
+  default = []
+}

@@ -3,7 +3,7 @@ packages:
   - jq
 
 write_files:
-  - path: /etc/vault.d/config.json
+  - path: /etc/consul.d/config.json
     content: ${consul_conf}
     permissions: '0644'
     owner: consul:consul

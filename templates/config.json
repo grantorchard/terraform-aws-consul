@@ -4,6 +4,9 @@
   "connect":{
       "enabled": true
   },
+  "address": {
+    "{{ GetInterfaceIP \"eth0\" }}"
+  },
   "datacenter": "${consul_datacenter}",
   "data_dir": "/opt/consul/data",
   "enable_syslog": true,
