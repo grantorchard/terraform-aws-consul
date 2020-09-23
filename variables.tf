@@ -41,3 +41,8 @@ variable my_cidrs {
   type = list
   default = []
 }
+
+variable version {
+  type = string
+  default = ""
+}
