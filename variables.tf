@@ -42,7 +42,7 @@ variable my_cidrs {
   default = []
 }
 
-variable version {
+variable consul_version {
   type = string
   default = ""
 }

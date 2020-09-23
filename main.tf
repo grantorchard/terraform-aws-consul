@@ -26,7 +26,7 @@ data aws_ami "ubuntu" {
 
   filter {
     name   = "tag:application"
-    values = ["consul-${var.version}"]
+    values = ["consul-${var.consul_version}"]
   }
 
   filter {
