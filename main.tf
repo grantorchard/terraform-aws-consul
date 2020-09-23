@@ -85,7 +85,7 @@ module "security_group_consul" {
       protocol    = "tcp"
       description = "consul ingress"
       cidr_blocks = "10.0.0.0/16,${join(",",var.my_cidrs)}"
-    }
+    },
     {
       from_port   = 8300
       to_port     = 8301
