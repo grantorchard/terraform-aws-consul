@@ -56,7 +56,7 @@ module "consul" {
   vpc_security_group_ids = [
     local.security_group_outbound,
     local.security_group_ssh,
-    module.security_group_consul.this_security_group_id
+    module.security_group_consul.security_group_id
   ]
 
   subnet_id = local.public_subnets[0]
